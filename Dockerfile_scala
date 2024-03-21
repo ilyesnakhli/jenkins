@@ -1,4 +1,4 @@
-# Use the official Jupyter Notebook image as the base image
+# Use the official Jupyter Notebook image as the base imagess
 FROM jupyter/scipy-notebook:latest
 
 # Install Java
