@@ -1,0 +1,43 @@
+# Use the official Jupyter Notebook image as the base image
+FROM jupyter/scipy-notebook:latest
+
+USER root   
+
+# Install Java and dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    default-jdk \
+    && rm -rf /var/lib/apt/lists/*
+
+# Download IJava
+RUN wget https://github.com/SpencerPark/IJava/releases/download/v1.3.0/ijava-1.3.0.zip
+RUN sudo apt update
+RUN sudo apt install unzip
+RUn mkdir -p /home/jovyan/ijava
+RUN unzip ijava-1.3.0.zip -d /home/jovyan/ijava
+RUN rm ijava-1.3.0.zip
+
+# Install kernel specifications
+WORKDIR /home/jovyan/ijava
+RUN python3 install.py --sys-prefix
+
+RUN groupadd -r jovyan
+
+# Set permissions for the IJava directory
+RUN chown -R jovyan:jovyan /home/jovyan/ijava
+# Set the working directory
+WORKDIR /home/jovyan/work
+
+#setting permessions
+RUN chmod +w /home/jovyan/.ipython
+RUN chown jovyan:jovyan /home/jovyan/.ipython
+#Environment variables
+ENV PYDEVD_DISABLE_FILE_VALIDATION=1
+# Expose the default port
+EXPOSE 8888
+
+# Start the container
+ENTRYPOINT ["jupyter", "notebook", "--NotebookApp.token=''", "--NotebookApp.allow_origin='*'"]
+
+
+USER jovyan
