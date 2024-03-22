@@ -1,6 +1,6 @@
 FROM jupyter/scipy-notebook:latest
 
-# Install Java
+# Install Javajj
 USER root
 RUN apt-get update && \
     apt-get install -y openjdk-8-jdk && \
