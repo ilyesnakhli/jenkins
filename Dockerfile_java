@@ -1,4 +1,4 @@
-# Use the official Jupyter Notebook image as the base images
+# Use the official Jupyter Notebook image as the base imagess
 FROM jupyter/scipy-notebook:latest
 
 USER root   
