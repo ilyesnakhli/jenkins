@@ -1,7 +1,7 @@
 FROM quay.io/jupyter/base-notebook
 USER root
 
-# Install the bash kernelsssss
+# Install the bash kernels
 RUN pip install bash_kernel && \
     python -m bash_kernel.install
 
