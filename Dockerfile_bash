@@ -1,5 +1,4 @@
 FROM quay.io/jupyter/base-notebook
-#ilsssssss
 USER root
 
 # Install the bash kernel
